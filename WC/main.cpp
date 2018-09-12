@@ -44,15 +44,22 @@ struct data
                 if(s_comment.length() == 0)
                 {
                     if(s_code.length() == 0)
+                    {
+
                         Empty ++;
+                    }
 
                     if(s_code.length() == 1 && (s_code[0] == '{' || s_code[0] == '}' || s_code[0] == ';'))
+                    {
                         Empty ++;
+                    }
                 }
                 //空行判断
 
-                if(s_code.length() > 1 || (s_code[0] != '{' && s_code[0] != '}' && s_code[0] != ';'))
+                if(s_code.length() > 1 || (s_code.length() == 1 && s_code[0] != '{' && s_code[0] != '}' && s_code[0] != ';'))
+                {
                     Code ++;
+                }
                 //代码行判断
 
                 s_code = "";
@@ -83,7 +90,7 @@ struct data
             else if(str[i - 1] == '/' && str[i] == '/')
             //将代码字符串最后一个 / 保存到注释字符串之中，并行注释标记为真
             {
-                s_code[s_code.length() - 1] = '\0';
+                s_code = s_code.substr(0, s_code.length() - 1);
                 s_comment = s_comment + str[i - 1] + str[i];
 
                 line_comment = true;
@@ -93,7 +100,7 @@ struct data
             else if(str[i - 1] == '/' && str[i] == '*')
             //将代码字符串最后一个 / 保存到注释字符串之中，并块注释标记为真
             {
-                s_code[s_code.length() - 1] = '\0';
+                s_code = s_code.substr(0, s_code.length() - 1);
                 s_comment = s_comment + str[i - 1] + str[i];
                 block_comment = true;
                 comment_exist = true;
@@ -196,7 +203,6 @@ struct data
 
 int main(int argc, char *argv[])
 {
-
     bool operation[5] = {false, false, false, false, false};
     //下表从0开始对应的操作为 -s, -a, -c, -w, -l
 
@@ -282,6 +288,7 @@ int main(int argc, char *argv[])
             puts("");
             num ++;
             FILE * fp = fopen(argv[i], "r");
+
             data test;
             if(test.input(fp))
                 printf("%s 是一个空文件！\n", argv[i]);
@@ -313,5 +320,3 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-//
