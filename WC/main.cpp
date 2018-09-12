@@ -6,7 +6,6 @@
 using namespace std;
 
 struct data
-//统计代码行,空行,注释行
 {
     int Empty = 0;  //空行
     int Code = 0;   //代码行
