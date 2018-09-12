@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1536661897 source:c:\users\24110\desktop\debug\wc\main.cpp
+	<bits/stdc++.h>
+	<unistd.h>
+	<dirent.h>
+	<stdlib.h>
+	<sys/stat.h>
+
